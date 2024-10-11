@@ -42,6 +42,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           colorBgLayout: "#F3F4F6",
           colorTextMenuSelected: "#10B981",
         },
+        components: {
+          Radio: {
+            colorBgContainer: "#e8f7fd",
+            colorBorder: "#5DC9EF",
+          },
+        },
       }}
     >
       <Layout>
