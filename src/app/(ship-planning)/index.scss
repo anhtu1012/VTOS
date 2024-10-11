@@ -1,0 +1,81 @@
+.tableHT {
+  .ant-table {
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      border: 1px solid #b9e7f8 !important;
+    }
+  }
+  // Custom header background color
+  .ant-table-thead > tr > th {
+    background-color: #e6f7ff !important;
+    color: #000 !important; // Optional: Change header text color to black for contrast
+  }
+
+  // Apply a background color for the first column (index)
+  .ant-table-thead > tr > th:nth-child(1),
+  .ant-table-tbody > tr > td:nth-child(1) {
+    background-color: #e6f7ff; // Background color for the index column
+    color: #000; // Text color for the index column
+  }
+
+  // Styling for selected row
+  .selected-row {
+    background-color: #f9f8ec !important;
+  }
+
+  .selected-row td,
+  .selected-row th {
+    background-color: #f9f8ec !important; // Apply color to all cells, including headers
+  }
+  .selected-row td:nth-child(2),
+  .selected-row th:nth-child(2) {
+    background-color: #f9f8ec !important; // Ensure the "Name" column changes color
+  }
+
+  // Alternate row background (white/gray)
+  .ant-table-tbody > tr:nth-child(odd) {
+    background-color: #ffffff !important; // White for odd rows
+  }
+
+  .ant-table-tbody > tr:nth-child(even) {
+    background-color: #f6f8fc !important; // Light gray for even rows
+  }
+
+  // Specific styling for the "Name" column
+  .ant-table-tbody > tr:nth-child(odd) > td:nth-child(2),
+  .ant-table-tbody > tr:nth-child(even) > td:nth-child(2) {
+    background-color: #f6f8fc; // Light gray for even rows in "Name" column
+  }
+
+  .ant-table-tbody > tr:nth-child(odd) > td:nth-child(2) {
+    background-color: #ffffff; // White for odd rows in "Name" column
+  }
+}
+.antd-form {
+  &__item {
+    margin-bottom: 12px !important;
+    label {
+      color: #4f575e !important;
+    }
+    input {
+      padding: 12px;
+      border-radius: 10px;
+    }
+    .ant-select-selector {
+      padding: 22px !important;
+      border-radius: 10px !important;
+      -webkit-border-radius: 10px !important;
+      -moz-border-radius: 10px !important;
+      -ms-border-radius: 10px !important;
+      -o-border-radius: 10px !important;
+    }
+    .ant-select-arrow {
+      padding: 15px !important;
+      border-radius: 10px !important;
+      -webkit-border-radius: 10px !important;
+      -moz-border-radius: 10px !important;
+      -ms-border-radius: 10px !important;
+      -o-border-radius: 10px !important;
+    }
+  }
+}

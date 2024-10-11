@@ -1,0 +1,13 @@
+
+.antd-form {
+  &__item {
+    margin-bottom: 12px !important;
+    label {
+      color: #4f575e !important;
+    }
+    input {
+      padding: 12px;
+      border-radius: 10px;
+    }
+  }
+}

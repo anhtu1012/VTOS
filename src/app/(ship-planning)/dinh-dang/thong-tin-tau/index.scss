@@ -1,0 +1,15 @@
+.antd-form {
+  &__keyShip {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  &__item {
+    width: 100%;
+  }
+  &__save {
+    text-align: right;
+  }
+}
