@@ -51,7 +51,7 @@ export default function InformationShip() {
               className="antd-form"
               onValuesChange={handleFormChange}
             >
-              <p className="px-3 font-semibold text-sm">Thông tin tàu</p>
+              <p className="antd-form__firstLabel">Thông tin tàu</p>
               <section className="antd-form__keyShip">
                 <Form.Item
                   className="antd-form__item"
