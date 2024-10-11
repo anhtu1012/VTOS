@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import Link from "next/link";
 
@@ -19,11 +19,19 @@ const SiderComponents: React.FC<SiderComponentsProps> = ({
   titleIcon,
   titleText,
 }) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  // Initialize activeIndex from localStorage or set to 0
+  const [activeIndex, setActiveIndex] = useState<number>(
+    () => Number(localStorage.getItem("activeIndex")) || 0
+  );
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
   };
+
+  // Save activeIndex to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("activeIndex", String(activeIndex));
+  }, [activeIndex]);
 
   return (
     <div className="sider-main">

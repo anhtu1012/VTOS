@@ -4,7 +4,6 @@ import { SaveOutlined } from "@ant-design/icons";
 import {
   Button,
   Col,
-  ConfigProvider,
   Divider,
   Form,
   Input,
@@ -26,21 +25,7 @@ export default function InformationShip() {
 
   return (
     <>
-      {" "}
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#5DC9EF",
-            colorBgHeader: "#5DC9EF",
-          },
-          components: {
-            Radio: {
-              colorBgContainer: "#e8f7fd",
-              colorBorder: "#5DC9EF",
-            },
-          },
-        }}
-      >
+  
         <LayoutContent
           layoutType={1}
           content1={
@@ -494,7 +479,6 @@ export default function InformationShip() {
             </Form>
           }
         />
-      </ConfigProvider>
     </>
   );
 }

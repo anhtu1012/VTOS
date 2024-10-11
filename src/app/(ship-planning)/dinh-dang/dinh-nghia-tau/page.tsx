@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { Table, ConfigProvider, Form, Input, Button } from "antd";
-import type { TableColumnsType, TableProps } from "antd";
-import "./index.scss";
 import LayoutContent from "@/components/layoutContent";
-import { IoIosAddCircle } from "react-icons/io";
+import type { TableColumnsType, TableProps } from "antd";
+import { Button, Form, Input, Table } from "antd";
+import React, { useState } from "react";
 import { FaRegSave } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import "./index.scss";
 
 interface Ship {
   shipId: string;
@@ -224,14 +224,6 @@ function ShipDefinition() {
 
   return (
     <>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#5DC9EF",
-            colorBgHeader: "#5DC9EF",
-          },
-        }}
-      >
         <LayoutContent
           layoutType={2}
           content1={
@@ -302,7 +294,6 @@ function ShipDefinition() {
             </Form>
           }
         />
-      </ConfigProvider>
     </>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 import LayoutContent from "@/components/layoutContent";
 import { Setting } from "@/model/setting";
-import { ConfigProvider, Table, Checkbox } from "antd";
-import React, { useState } from "react";
+import { Table } from "antd";
+import { useState } from "react";
 
 const SetTing = () => {
   // Sample data
@@ -70,14 +70,6 @@ const SetTing = () => {
   ];
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#5DC9EF",
-          colorBgHeader: "#5DC9EF",
-        },
-      }}
-    >
       <LayoutContent
         layoutType={1}
         content1={
@@ -91,7 +83,6 @@ const SetTing = () => {
           </div>
         }
       />
-    </ConfigProvider>
   );
 };
 
