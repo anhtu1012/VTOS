@@ -1,7 +1,7 @@
 import React from "react";
 
 function WeightMax() {
-  return <div>WeightMax</div>;
+  return <div>Minhtest</div>;
 }
 
 export default WeightMax;
