@@ -47,9 +47,61 @@ const categoriesData = {
     { icon: <GiBus />, title: "In sơ đồ tàu", link: "/dinh-dang/in-so-do-tau" },
   ],
   "3": [
-    { icon: <GiTruck />, title: "Category B1", link: "/category-b1" },
-    { icon: <GiCarWheel />, title: "Category B2", link: "/category-b2" },
-    { icon: <GiBus />, title: "Category B3", link: "/category-b3" },
+    {
+      icon: <GiTruck />,
+      title: "Kế hoạch tàu",
+      link: "/ke-hoach/ke-hoach-tau",
+    },
+    {
+      icon: <GiCarWheel />,
+      title: "Kế hoạch dỡ container",
+      link: "/ke-hoach/ke-hoach-do-container",
+    },
+    {
+      icon: <GiBus />,
+      title: "Kế hoạch xếp container",
+      link: "/ke-hoach/ke-hoach-xep-container",
+    },
+    {
+      icon: <GiBus />,
+      title: "Danh sách container xuất tàu",
+      link: "/ke-hoach/danh-sach-container-xuat-tau",
+    },
+    {
+      icon: <GiBus />,
+      title: "Giám sát bãi",
+      link: "/ke-hoach/giam-sat-bai",
+    },
+    {
+      icon: <GiBus />,
+      title: "Thống kê kế hoạch xếp dỡ",
+      link: "/ke-hoach/thong-ke-ke-hoach-xep-do",
+    },
+    {
+      icon: <GiBus />,
+      title: "Gán cẩu",
+      link: "/ke-hoach/gan-cau",
+    },
+    {
+      icon: <GiBus />,
+      title: "Cập nhật danh sách container xuất tàu",
+      link: "/ke-hoach/cap-nhat-danh-sach-container-xuat-tau",
+    },
+    {
+      icon: <GiBus />,
+      title: "In kế hoạch",
+      link: "/ke-hoach/in-ke-hoach",
+    },
+    {
+      icon: <GiBus />,
+      title: "CMC",
+      link: "/ke-hoach/CMC",
+    },
+    {
+      icon: <GiBus />,
+      title: "Out Bound Prelan",
+      link: "/ke-hoach/out-bound-preplan",
+    },
   ],
   "4": [
     { icon: <GiTruck />, title: "Pre-Plan 1", link: "/pre-plan-1" },
@@ -122,7 +174,7 @@ const SiderMain = ({
     ),
     getItem(
       <Link
-        href={"/dinh-dang/dinh-nghia-tau"}
+        href={"/ke-hoach/ke-hoach-tau"}
         onClick={() => setCollapsed(true)}
       >
         <p>Kế Hoạch</p>
