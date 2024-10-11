@@ -5,7 +5,7 @@ import React from "react";
 function Test() {
   return (
     <>
-      <LayoutContent layoutType={2} >a</LayoutContent>
+      <LayoutContent layoutType={2} >TESTABC</LayoutContent>
     </>
   );
 }
