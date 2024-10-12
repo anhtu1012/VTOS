@@ -1,0 +1,31 @@
+.antd-components {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  &__radio {
+    padding-top: 8px;
+  }
+  &__rightside {
+    margin-right: 20px;
+  }
+  .ant-select {
+    margin-right: 18px;
+  }
+  .ant-select-selector {
+    padding: 20px !important;
+    margin-right: 12px !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
+  }
+  .ant-select-arrow {
+    padding: 12px !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
+  }
+}
