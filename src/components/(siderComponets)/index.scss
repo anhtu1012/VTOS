@@ -2,7 +2,8 @@
 
 .sider-main {
   width: 250px;
-
+  height: 100vh;
+  background-color: rgb(203, 212, 225,0.15);
   &__title {
     display: flex;
     justify-content: center;
@@ -49,6 +50,8 @@
         color: #475569; /* Default color */
         font-weight: 500;
         font-size: 10.79px;
+        width: 100px;
+        height: 25px;
       }
 
       /* Styles for the active (clicked) category */

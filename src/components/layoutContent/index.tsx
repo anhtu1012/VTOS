@@ -64,15 +64,32 @@ function LayoutContent({ layoutType, content1, content2 }: LayoutContentProps) {
           display: "flex",
           flexDirection: "column",
           height: "90vh",
-          backgroundColor: "#fff",
-          padding: "12px",
           borderRadius: "10px",
+          gap: "12px",
         }}
       >
-        <div style={{ flex: 2, backgroundColor: "#fafafa", padding: "12px" }}>
+        <div
+          style={{
+            flex: 2,
+            backgroundColor: "#fff",
+            height: "auto",
+            padding: "12px",
+            borderRadius: "10px",
+          }}
+        >
+          <div className="feature">
+              {/* Thêm xóa lưu ở đây */}
+          </div>
           {content1}
         </div>
-        <div style={{ flex: 8, backgroundColor: "#f5f5f5", padding: "12px" }}>
+        <div
+          style={{
+            flex: 8,
+            backgroundColor: "#fff",
+            padding: "12px",
+            borderRadius: "10px",
+          }}
+        >
           {content2}
         </div>
       </div>

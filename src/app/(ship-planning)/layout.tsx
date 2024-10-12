@@ -56,7 +56,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <HeaderMain collapsed={collapsed} />
           <Content
             style={{
-              margin: collapsed ? "24px 16px 24px 250px" : "24px 16px",
+              margin: collapsed ? "24px 16px 24px 274px" : "24px 24px",
               minHeight: 280,
               background: "transparent",
               borderRadius: borderRadiusLG,
