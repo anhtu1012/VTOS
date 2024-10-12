@@ -27,11 +27,12 @@ const HeaderMain = ({ collapsed }: { collapsed: boolean }) => {
   }, [shipInfo]);
 
   return (
+
     <>
       <Header
         style={{
           padding: 0,
-          margin: collapsed ? "0px 16px 0px 250px" : "0px 16px",
+           margin: collapsed ? "0px 16px 0px 274px" : "0px 24px",
         }}
         className="headerS"
       >

@@ -7,14 +7,9 @@ import { FaRegSave } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "./index.scss";
+import { Ship } from "@/model/ship-definition/ship";
 
-interface Ship {
-  shipId: string;
-  shipName: string;
-  shipBrand: string;
-}
-
-const data: Ship = [
+const data: Ship[] = [
   {
     shipId: "S001",
     shipName: "Titanic",
