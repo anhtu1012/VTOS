@@ -2,57 +2,251 @@ import "./index.scss";
 
 const LoadingTruck = () => {
   return (
-    <div
-      className="container_loading"
-      style={{ width: "100vw", height: "100vh" }}
-    >
-      <svg className="truck" viewBox="0 0 48 24" width="48px" height="24px">
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1"
-          transform="translate(0,2)"
-        >
-          <g className="truck__body">
-            <g strokeDasharray="105 105">
-              <polyline
-                className="truck__outside1"
-                points="2 17,1 17,1 11,5 9,7 1,39 1,39 6"
+    <div className="loading_container">
+      <section className="wrap">
+        <div className="elmar">
+          <div className="cielo"></div>
+          <div className="barco">
+            <div className="puente">
+              <div className="chimeneal">
+                <div className="linea"></div>
+              </div>
+              <div className="chimenear">
+                <div className="linea"></div>
+              </div>
+              <div className="franja"></div>
+              <div className="camarote1">
+                <div className="antiskew">
+                  <div className="ventana"></div>
+                  <div className="ventana"></div>
+                  <div className="ventana"></div>
+                  <div className="ventana"></div>
+                  <div className="ventana"></div>
+                  <div className="puertita"></div>
+                </div>
+              </div>
+              <div className="radar">
+                <div className="cabeza"></div>
+                <div className="soporte"></div>
+              </div>
+              <div className="fantena"></div>
+              <div className="santenea"></div>
+              <div className="control">
+                <div className="tapa">
+                  <div className="top-ventana"></div>
+                  <div className="top-ventana"></div>
+                  <div className="top-ventana"></div>
+                </div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="mid-ventana"></div>
+                <div className="puertita"></div>
+              </div>
+              <div className="bajo-camarotes">
+                <div className="ventanitas"></div>
+                <div className="ventanitas"></div>
+                <div className="ventanitas"></div>
+                <div className="ventanitas"></div>
+                <div className="ventanitas"></div>
+                <div className="ventanitas"></div>
+              </div>
+            </div>
+            <div className="base">
+              <div className="atras"></div>
+              <div className="popa"></div>
+              <div className="tronco">
+                <div className="marca">
+                  <div className="per"></div>
+                </div>
+              </div>
+              <div className="proa"></div>
+              <div className="anclacont"></div>
+            </div>
+            <div className="contenedores">
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+              <div className="contenedor">
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+                <div className="cal"></div>
+              </div>
+            </div>
+          </div>
+          <div className="agua">
+            <svg
+              version="1.1"
+              className="olacont"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 13685.8 298.5"
+              style={{ enableBackground: "new 0 0 13685.8 298.5" }}
+              xmlSpace="preserve"
+            >
+              <path
+                className="olita"
+                d="M13641.6,241.3c-325.4-8.8-403.9-213.3-535-213.3c-85.9,0-159.3,27.7-292.7,127.3c-93.3,69.7-372.3,86-372.3,86
+				h-44.1c-325.4-8.8-403.9-213.3-535-213.3c-85.9,0-159.3,27.7-292.7,127.3c-93.3,69.7-372.3,86-372.3,86h-44.1
+				c-325.4-8.8-403.9-213.3-535-213.3c-85.9,0-159.3,27.7-292.7,127.3c-93.3,69.7-372.3,86-372.3,86h-44.1
+				c-325.4-8.8-661.3-147-827.7-86c-109.4,40.1-372.3,86-372.3,86H8665C8339.6,232.6,8261.1,28,8130,28c-85.9,0-159.3,27.7-292.7,127.3
+				c-93.3,69.7-372.3,86-372.3,86h-44.2c-301.4-8.1-708.8-174.7-827.7-86c-78.8,58.8-289.7,79.6-353.6,84.7c-0.6,0-1.2,0.1-1.7,0.1
+				c-1.1,0.1-2.2,0.2-3.2,0.2c-1.5,0.1-3,0.2-4.3,0.3c-0.9,0.1-1.7,0.1-2.4,0.2c-4.5,0.3-7,0.5-7,0.5h-44.1
+				C5851.3,232.6,5772.8,8,5641.7,8c-85.9,0-159.3,47.7-292.7,147.3c-93.3,69.7-372.3,86-372.3,86h-44.1
+				c-325.4-8.8-694.3-185.6-827.7-86c-93.3,69.7-372.3,86-372.3,86h-44.1C3363,232.6,3284.4,28,3153.4,28
+				c-85.9,0-159.3,27.7-292.7,127.3c-93.3,69.7-372.3,86-372.3,86h-44.1c-325.4-8.8-403.9-179.3-535-179.3
+				c-85.9,0-159.3-6.3-292.7,93.3c-93.3,69.7-372.3,86-372.3,86H1200C874.7,232.6,796.1,28,665,28c-85.9,0-159.3,27.7-292.7,127.3
+				C278.9,225,0,241.3,0,241.3v57.2h0h1244.2h0h1244.2h0h1244.2h0h1244.2h0h1244.2h0H7465h0h1244.2l0,0h1244.2l0,0h1244.2l0,0h1244.2
+				l0,0h1244.2v-57.2H13641.6z"
               />
-              <polyline
-                className="truck__outside2"
-                points="39 12,39 17,31.5 17"
-              />
-              <polyline className="truck__outside3" points="22.5 17,11 17" />
-              <polyline className="truck__window1" points="6.5 4,8 4,8 9,5 9" />
-              <polygon
-                className="truck__window2"
-                points="10 4,10 9,14 9,14 4"
-              />
-            </g>
-            <polyline
-              className="truck__line"
-              points="43 8,31 8"
-              strokeDasharray="10 2 10 2 10 2 10 2 10 2 10 26"
-            />
-            <polyline
-              className="truck__line"
-              points="47 10,31 10"
-              strokeDasharray="14 2 14 2 14 2 14 2 14 18"
-            />
-          </g>
-          <g strokeDasharray="15.71 15.71">
-            <g className="truck__wheel">
-              <circle className="truck__wheel-spin" r="2.5" cx="6.5" cy="17" />
-            </g>
-            <g className="truck__wheel">
-              <circle className="truck__wheel-spin" r="2.5" cx="27" cy="17" />
-            </g>
-          </g>
-        </g>
-      </svg>
+            </svg>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

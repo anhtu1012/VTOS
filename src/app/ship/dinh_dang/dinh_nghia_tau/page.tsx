@@ -219,7 +219,6 @@ function ShipDefinition() {
   };
   const onButtonClick = () => {
     if (selectedData) {
-      console.log(selectedData);
 
       localStorage.setItem("selectedData", JSON.stringify(selectedData));
       // Trigger a custom event to notify other components that localStorage has changed

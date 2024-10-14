@@ -2,65 +2,73 @@
 import React, { useState } from "react";
 import "./index.scss";
 import { Col, Row } from "antd";
-import { useRouter } from "next/navigation";
 import LoadingTruck from "@/components/loading";
 
 function ChooseCategory() {
   const listModule = JSON.parse(
-    `[{\"module_code\": \"CA\", \"module_name\": \"Category\"},{\"module_code\": \"OM\", \"module_name\": \"Operation Management\"},{\"module_code\": \"MC\", \"module_name\": \"Monitoring and Control\"},{\"module_code\": \"YARD\", \"module_name\": \"Yard Planning\"}, \t\t\t\t{\"module_code\": \"SHIP\", \"module_name\": \"Ship Planning\"},{\"module_code\": \"CD\", \"module_name\": \"Change Data\"},{\"module_code\": \"BERTH\", \"module_name\": \"Berth Planning\"}, \t\t\t\t{\"module_code\": \"HIS\", \"module_name\": \"His Viewer\"},{\"module_code\": \"RP\", \"module_name\": \"Report\"},{\"module_code\": \"EDI\", \"module_name\": \"Electronic Data Interchange\"}]`
+    `[{\"module_code\": \"CA\", \"module_name\": \"Category\"},{\"module_code\": \"OM\", \"module_name\": \"Operation Management\"},{\"module_code\": \"MC\", \"module_name\": \"Monitoring and Control\"},{\"module_code\": \"YARD\", \"module_name\": \"Yard Planning\"}, {\"module_code\": \"SHIP\", \"module_name\": \"Ship Planning\"},{\"module_code\": \"CD\", \"module_name\": \"Change Data\"},{\"module_code\": \"BERTH\", \"module_name\": \"Berth Planning\"}, {\"module_code\": \"HIS\", \"module_name\": \"His Viewer\"},{\"module_code\": \"RP\", \"module_name\": \"Report\"},{\"module_code\": \"EDI\", \"module_name\": \"Electronic Data Interchange\"}]`
   );
-  const router = useRouter();
+  
   const [loading, setLoading] = useState(false);
+
   // Hàm xóa cookie
   const deleteCookie = (cookieName: string) => {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   };
-  const handleClick = (module: string) => {
+
+  // Hàm điều hướng và xử lý loading
+  const handleClick = async (module: string) => {
     console.log(module);
     deleteCookie("submodule");
-    setLoading(true);
+    localStorage.removeItem("selectedMenuItem");
+    localStorage.removeItem("siderCollapsed");
+
+    setLoading(true); // Bắt đầu loading
     switch (module) {
       case "SHIP":
-        router.push("/ship/he-thong/thiet-lap-quy-luat", { scroll: false });
+        window.location.href = "/ship/he_thong/thiet_lap_quy_luat";
         break;
       case "CA":
-        router.push("/category/quan-ly", { scroll: false });
+        window.location.href = "/category/quan_ly";
         break;
       case "OM":
-        router.push("/om/cate1", { scroll: false });
+        window.location.href = "/om/tau_ben/xem_ke_hoach_ben";
         break;
       case "MC":
-        router.push("/monitoring/quan-ly", { scroll: false });
+        window.location.href = "/monitoring/quan-ly";
         break;
       case "YARD":
-        router.push("/yard/quan-ly", { scroll: false });
+        window.location.href = "/yard/quan-ly";
         break;
       case "CD":
-        router.push("/change-data/quan-ly", { scroll: false });
+        window.location.href = "/change-data/quan-ly";
         break;
       case "BERTH":
-        router.push("/berth/quan-ly", { scroll: false });
+        window.location.href = "/berth/quan-ly";
         break;
       case "HIS":
-        router.push("/his-viewer/quan-ly", { scroll: false });
+        window.location.href = "/his-viewer/quan-ly";
         break;
       case "RP":
-        router.push("/report/quan-ly", { scroll: false });
+        window.location.href = "/report/quan-ly";
         break;
       case "EDI":
-        router.push("/edi/quan-ly", { scroll: false });
+        window.location.href = "/edi/quan-ly";
         break;
       default:
         console.log("No matching module");
+        setLoading(false); // Nếu không có module phù hợp
+        return;
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+
+    // Ngừng loading sau khi chuyển hướng
+    setLoading(false);
   };
+
   return (
     <>
-      {loading ? ( // Hiển thị Spin khi đang loading
-        <div className="loading-container">
+      {loading ? (
+        <div>
           <LoadingTruck />
         </div>
       ) : (

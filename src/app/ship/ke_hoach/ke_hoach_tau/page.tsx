@@ -169,7 +169,6 @@ function ShipPlan() {
   const [form] = Form.useForm();
   const [selectedRowKey, setSelectedRowKey] = useState<React.Key | null>(null);
   const [selectedData, setSelectedData] = useState<Schedule | null>(null);
-  console.log(selectedData);
 
   const onRowClick = (record: Schedule) => {
     if (record.shipId === selectedRowKey) {

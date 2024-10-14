@@ -48,6 +48,7 @@ const SiderComponents: React.FC<SiderComponentsProps> = ({
         {categories.map((category, index) => (
           <div key={index}>
             <Link
+              prefetch={false}
               href={category.link}
               className={`category ${activeIndex === index ? "active" : ""}`}
               onClick={() => handleClick(index)}
