@@ -1,17 +1,19 @@
-"use client";
 import { Layout } from "antd";
 import "./index.scss";
 import { FaRegUser } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMdLogOut, IoMdNotificationsOutline } from "react-icons/io";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const { Header } = Layout;
+const listModule = JSON.parse(
+  `[{\"module_code\": \"CA\", \"module_name\": \"Category\"},{\"module_code\": \"OM\", \"module_name\": \"Operation Management\"},{\"module_code\": \"MC\", \"module_name\": \"Monitoring and Control\"},{\"module_code\": \"YARD\", \"module_name\": \"Yard Planning\"}, \t\t\t\t{\"module_code\": \"SHIP\", \"module_name\": \"Ship Planning\"},{\"module_code\": \"CD\", \"module_name\": \"Change Data\"},{\"module_code\": \"BERTH\", \"module_name\": \"Berth Planning\"}, \t\t\t\t{\"module_code\": \"HIS\", \"module_name\": \"His Viewer\"},{\"module_code\": \"RP\", \"module_name\": \"Report\"},{\"module_code\": \"EDI\", \"module_name\": \"Electronic Data Interchange\"}]`
+);
 
 const HeaderMain = ({
   collapsed,
   shipInfo,
-  setShipInfo, // Nhận setShipInfo từ props
+  setShipInfo,
 }: {
   collapsed: boolean;
   shipInfo: {
@@ -31,10 +33,10 @@ const HeaderMain = ({
     } | null>
   >;
 }) => {
+  const [submoduleName, setSubmoduleName] = useState<string>("Ship Planning");
+
   const loadShipInfo = () => {
     const storageData = localStorage.getItem("selectedData");
-    console.log("test", storageData);
-
     if (storageData) {
       try {
         const parsedData = JSON.parse(storageData);
@@ -62,13 +64,40 @@ const HeaderMain = ({
     }
   };
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  };
+
+  const getSubmoduleNameFromCookies = () => {
+    let savedSubmodule = getCookie("submodule");
+    if (savedSubmodule) {
+      savedSubmodule = decodeURIComponent(savedSubmodule)
+        .replace(/\//g, "")
+        .replace(/%2F/g, "");
+
+      const matchedModule = listModule.find(
+        (module) =>
+          module.module_code.toLowerCase() === savedSubmodule.toLowerCase()
+      );
+      console.log(matchedModule);
+
+      if (matchedModule) {
+        setSubmoduleName(matchedModule.module_name);
+      }
+    }
+  };
+
   useEffect(() => {
     loadShipInfo();
+    getSubmoduleNameFromCookies();
 
     const handleStorageChange = () => {
       loadShipInfo();
-      console.log("test2", shipInfo);
     };
+
     window.addEventListener("localStorageUpdate", handleStorageChange);
     window.addEventListener("storage", handleStorageChange);
 
@@ -89,7 +118,7 @@ const HeaderMain = ({
       >
         <div className="headerS__title-left">
           <p>VIETNAM TERMINAL OPERATION SYSTEM</p>
-          <span>Ship Planning</span>
+          <span>{submoduleName}</span>
         </div>
         <div className="headerS__title-right">
           <div className="user">

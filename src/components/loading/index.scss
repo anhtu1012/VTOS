@@ -1,183 +1,415 @@
-$debug: false;
-$ease-in: cubic-bezier(0.33, 0, 0.67, 0);
-$ease-out: cubic-bezier(0.33, 1, 0.67, 1);
-.container_loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
-  .truck {
-    @if $debug == true {
-      outline: 1px solid;
-    }
-    --dur: 3s;
-    display: block;
-    width: 24em;
-    height: auto;
+.loading_container {
+  $baseBarco: #58575c;
+  $rojo: red;
+  $ventana: #003f5f;
+  $sombra: #cccdd1;
+  $blanco: white;
 
-    &__body,
-    &__line,
-    &__outside1,
-    &__outside2,
-    &__outside3,
-    &__wheel,
-    &__wheel-spin,
-    &__window1,
-    &__window2 {
-      animation: truck-body var(--dur) linear infinite;
+  @keyframes radar {
+    0% {
+      transform: rotateY(0deg);
     }
-    &__body {
-      transform-origin: 17px 11px;
+    100% {
+      transform: rotateY(180deg);
     }
-    &__line {
-      animation-name: truck-line;
+  }
+  @keyframes barco {
+    0% {
+      transform: rotate(-2deg) translateX(2px);
     }
-    &__outside1 {
-      animation-name: truck-outside1;
+    50% {
+      transform: rotate(1deg) translateX(-10px);
     }
-    &__outside2 {
-      animation-name: truck-outside2;
+    100% {
+      transform: rotate(-2deg) translateX(2px);
     }
-    &__outside3 {
-      animation-name: truck-outside3;
+  }
+  @keyframes contenedores {
+    0% {
+      transform: translateX(-7px);
     }
-    &__wheel {
-      animation-name: truck-wheel;
-
-      &-spin {
-        animation-name: truck-wheel-spin;
-        transform-origin: 6.5px 17px;
+    50% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(-7px);
+    }
+  }
+  @keyframes ola {
+    0% {
+      right: 0%;
+    }
+    100% {
+      right: 100%;
+    }
+  }
+  @keyframes olita {
+    0% {
+      bottom: 0;
+    }
+    100% {
+      bottom: -29px;
+    }
+  }
+  .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  }
+  .barco {
+    width: 400px;
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    animation-name: barco;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    .puertita {
+      position: absolute;
+      bottom: 0px;
+      left: 7px;
+      width: 5px;
+      height: 10px;
+      background-color: $baseBarco;
+      border-radius: 5px;
+    }
+    .base {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      .proa,
+      .popa,
+      .tronco {
+        background-color: $baseBarco;
       }
-      &:nth-child(2) {
-        animation-delay: calc(var(--dur) * 0.0625);
+      .anclacont {
+        position: absolute;
+        right: 32px;
+        bottom: 36px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(black, 0.2);
       }
-      &:nth-child(2) &-spin {
-        transform-origin: 27px 17px;
+      .atras {
+        height: 58px;
+        width: 40px;
+        border-radius: 10px;
+        background-color: $baseBarco;
+        margin-left: 5px;
+        transform: skewX(13deg);
+      }
+      .popa {
+        height: 58px;
+        width: 95px;
+        transform: skewX(37deg);
+        border-radius: 10px 18px 10px 18px;
+        position: absolute;
+        left: 30px;
+        top: 0;
+      }
+      .tronco {
+        width: 347px;
+        height: 37px;
+        position: absolute;
+        left: 9px;
+        bottom: 0;
+        z-index: 10;
+        .marca {
+          height: 14px;
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          left: 0%;
+          -webkit-perspective: 150px;
+          .per {
+            height: 100%;
+            background-color: rgba($rojo, 0.4);
+            transform: rotateX(7deg);
+            border-radius: 0 0 3px 3px;
+          }
+        }
+      }
+      .proa {
+        height: 58px;
+        width: 91px;
+        transform: skewX(-47deg);
+        border-radius: 14px 10px 10px 18px;
+        position: absolute;
+        right: 26px;
+        top: 0;
       }
     }
-    &__window1 {
-      animation-name: truck-window1;
+    .puente {
+      width: 118px;
+      height: 124px;
+      position: absolute;
+      left: 12px;
+      top: 0;
+      .franja {
+        background-color: $baseBarco;
+        position: absolute;
+        bottom: 70px;
+        width: 35px;
+        height: 5px;
+        transform: skewX(-5deg);
+        left: 10px;
+      }
+      .camarote1 {
+        position: absolute;
+        bottom: 0;
+        left: 5px;
+        width: 36px;
+        height: 70px;
+        transform: skewX(-5deg);
+        background-color: white;
+        &:after {
+          content: " ";
+          position: absolute;
+          bottom: 0;
+          right: -2px;
+          background-color: $sombra;
+          height: 100%;
+          width: 3px;
+          z-index: -1;
+          transform: skewX(3deg);
+        }
+        .antiskew {
+          transform: skewX(5deg);
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 7px 7px;
+          height: 45px;
+        }
+        .ventana {
+          width: 5px;
+          height: 5px;
+          border-radius: 1px;
+          background-color: $ventana;
+          margin: 2px;
+        }
+      }
+      .chimeneal,
+      .chimenear {
+        background-color: white;
+        .linea {
+          height: 10px;
+          width: 100%;
+          margin-top: 4px;
+          background-color: $rojo;
+        }
+      }
+      .chimeneal {
+        width: 14px;
+        height: 43px;
+        position: absolute;
+        top: 9px;
+        left: 16px;
+        transform: skewX(-6deg);
+      }
+      .chimenear {
+        width: 20px;
+        height: 43px;
+        position: absolute;
+        top: 9px;
+        left: 19px;
+      }
     }
-    &__window2 {
-      animation-name: truck-window2;
+    .fantena {
+      position: absolute;
+      width: 2px;
+      height: 40px;
+      left: 87px;
+      top: 2px;
+      background-color: #3a3939;
+      border-radius: 3px;
+    }
+    .santenea {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      left: 83px;
+      top: 19px;
+      background-color: #3a3939;
+      border-radius: 3px;
+    }
+    .radar {
+      position: absolute;
+      height: 20px;
+      left: 50px;
+      top: 19px;
+      .cabeza {
+        width: 18px;
+        height: 7px;
+        background-color: $blanco;
+        animation-name: radar;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+      }
+      .soporte {
+        width: 4px;
+        height: 20px;
+        background-color: $blanco;
+        margin-left: 7px;
+        margin-top: -8px;
+        border-radius: 1px;
+      }
+    }
+    .control {
+      width: 62px;
+      height: 57px;
+      background-color: $blanco;
+      position: absolute;
+      right: 13px;
+      top: 36px;
+      padding-top: 15px;
+      padding-bottom: 10px;
+      padding-left: 5px;
+      padding-right: 5px;
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      border-bottom: solid 1px $sombra;
+      .tapa {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 2px;
+        background-color: $blanco;
+        height: 13px;
+        transform: skewX(-8deg);
+        border-radius: 0 4px 0 0;
+        padding: 2px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .top-ventana {
+          background-color: $ventana;
+          height: 6px;
+          width: 28%;
+          transform: skewX(5deg);
+        }
+      }
+      .mid-ventana {
+        width: 5px;
+        height: 5px;
+        border-radius: 1px;
+        background-color: $ventana;
+        display: block;
+        margin: 2px;
+        &:nth-of-type(7) {
+          margin-left: 10px;
+        }
+      }
+      .puertita {
+        bottom: 2px;
+      }
+    }
+    .bajo-camarotes {
+      background-color: $blanco;
+      width: 69px;
+      height: 31px;
+      position: absolute;
+      bottom: 0;
+      right: 6px;
+      display: flex;
+      justify-content: flex-end;
+      padding: 5px 5px 14px 41px;
+      flex-wrap: wrap;
+      &:after {
+        content: " ";
+        background-color: $blanco;
+        position: absolute;
+        right: -2px;
+        top: 0;
+        width: 5px;
+        height: 100%;
+        transform: rotate(-7deg);
+      }
+      .ventanitas {
+        background-color: $ventana;
+        width: 5px;
+        height: 3px;
+        border-radius: 2px;
+        margin: 1px;
+        &:nth-of-type(4) {
+          margin-left: 4px;
+        }
+      }
+    }
+    .contenedores {
+      width: 158px;
+      height: 80px;
+      position: absolute;
+      top: 80px;
+      right: 102px;
+      animation-name: contenedores;
+      animation-iteration-count: infinite;
+      animation-duration: 5s;
+      .contenedor {
+        width: 50px;
+        height: 16px;
+        background-color: #a4b8b9;
+        padding: 1px 2px;
+        display: flex;
+        float: left;
+        justify-content: space-around;
+        margin-bottom: 1px;
+        margin-right: 1px;
+        &:nth-of-type(2) {
+          background-color: #4f4a65;
+        }
+        &:nth-of-type(4) {
+          background-color: #b36730;
+        }
+      }
+      .cal {
+        background: black;
+        height: 100%;
+        width: 2px;
+        border-radius: 1px;
+        opacity: 0.07;
+      }
     }
   }
 
-  /* Animations */
-  @keyframes truck-body {
-    from,
-    12.5%,
-    25%,
-    37.5%,
-    50%,
-    62.5%,
-    75%,
-    87.5%,
-    to {
-      animation-timing-function: $ease-in;
-      transform: translate(0, 0) rotate(0);
-    }
-    6.25%,
-    18.75%,
-    31.25%,
-    43.75%,
-    56.25%,
-    68.75%,
-    81.25%,
-    93.75% {
-      animation-timing-function: $ease-out;
-      transform: translate(0, 1px) rotate(-0.75deg);
-    }
-  }
-
-  @keyframes truck-line {
-    from {
-      stroke-dashoffset: -18;
-    }
-    to {
-      stroke-dashoffset: 78;
+  .elmar {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+    background-color: #c0ebff;
+    .agua {
+      background-color: #25b9ee;
+      width: 100%;
+      height: 36%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      .olacont {
+        width: 200%;
+        top: -18px;
+        position: relative;
+        animation-name: ola;
+        animation-iteration-count: infinite;
+        animation-duration: 30s;
+        animation-timing-function: lineal;
+      }
     }
   }
-
-  @keyframes truck-outside1 {
-    from {
-      stroke-dashoffset: 105;
-    }
-    to {
-      stroke-dashoffset: -105;
-    }
-  }
-
-  @keyframes truck-outside2 {
-    from {
-      stroke-dashoffset: 168;
-    }
-    to {
-      stroke-dashoffset: -42;
-    }
-  }
-
-  @keyframes truck-outside3 {
-    from {
-      stroke-dashoffset: 192;
-    }
-    to {
-      stroke-dashoffset: -18;
-    }
-  }
-
-  @keyframes truck-wheel {
-    from,
-    12.5%,
-    25%,
-    37.5%,
-    50%,
-    62.5%,
-    75%,
-    87.5%,
-    to {
-      animation-timing-function: $ease-in;
-      transform: translate(0, 0);
-    }
-    6.25%,
-    18.75%,
-    31.25%,
-    43.75%,
-    56.25%,
-    68.75%,
-    81.25%,
-    93.75% {
-      animation-timing-function: $ease-out;
-      transform: translate(0, -1px);
-    }
-  }
-
-  @keyframes truck-wheel-spin {
-    from {
-      stroke-dashoffset: -15.71;
-      transform: rotate(0);
-    }
-    to {
-      stroke-dashoffset: 15.71;
-      transform: rotate(-4turn);
-    }
-  }
-
-  @keyframes truck-window1 {
-    from {
-      stroke-dashoffset: -21;
-    }
-    to {
-      stroke-dashoffset: 189;
-    }
-  }
-
-  @keyframes truck-window2 {
-    from {
-      stroke-dashoffset: -39;
-    }
-    to {
-      stroke-dashoffset: 171;
-    }
+  .olita {
+    fill: #25b9ee;
+    animation-name: olita;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    position: relative;
   }
 }
