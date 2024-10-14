@@ -6,6 +6,7 @@ import SiderMain from "@/components/layout/sider";
 import "./index.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingTruck from "@/components/loading";
 
 const { Content } = Layout;
 
@@ -44,7 +45,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (!ready) {
     // Render loader hoặc trang trắng trong khi trạng thái collapsed đang được tải
-    return <div>Loading...</div>;
+    return <div><LoadingTruck/></div>;
   }
 
   return (

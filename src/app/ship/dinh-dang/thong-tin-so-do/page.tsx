@@ -9,7 +9,7 @@ import EditableCell from "@/components/editableCell";
 import generateFieldConfig from "@/utils/validationEditCell";
 import { IoIosAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
-
+//khai báo kiểu dữ liệu validate editCell
 const shipFields = {
   bay: Number,
   tier: Number,
