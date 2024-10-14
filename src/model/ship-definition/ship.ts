@@ -1,6 +1,5 @@
 export interface Ship {
-    shipId: string;
-    shipName: string;
-    shipBrand: string;
-  }
-  
+  shipId: string;
+  shipName: string;
+  shipBrand: string;
+}

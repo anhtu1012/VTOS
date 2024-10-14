@@ -176,12 +176,10 @@ function ShipPlan() {
       form.resetFields();
       setSelectedRowKey(null);
       setSelectedData(null);
-      localStorage.removeItem("selectedData");
     } else {
       setSelectedRowKey(record.shipId);
       setSelectedData(record);
       form.setFieldsValue(record);
-      // localStorage.setItem("selectedData", JSON.stringify(record));
     }
   };
 
@@ -201,7 +199,9 @@ function ShipPlan() {
   const onButtonClick = () => {
     if (selectedData) {
       localStorage.setItem("selectedData", JSON.stringify(selectedData));
-      console.log("Data stored in localStorage:", selectedData);
+      // Trigger a custom event to notify other components that localStorage has changed
+      const storageEvent = new Event("localStorageUpdate");
+      window.dispatchEvent(storageEvent);
     } else {
       console.log("No data selected");
     }

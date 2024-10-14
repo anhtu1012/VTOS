@@ -8,6 +8,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "./index.scss";
 import { Ship } from "@/model/ship-definition/ship";
+import { CiSearch } from "react-icons/ci";
 
 const data: Ship[] = [
   {
@@ -216,12 +217,39 @@ function ShipDefinition() {
   const rowClassName = (record: Ship) => {
     return record.shipId === selectedRowKey ? "selected-row" : "";
   };
+  const onButtonClick = () => {
+    if (selectedData) {
+      console.log(selectedData);
+
+      localStorage.setItem("selectedData", JSON.stringify(selectedData));
+      // Trigger a custom event to notify other components that localStorage has changed
+      const storageEvent = new Event("localStorageUpdate");
+      window.dispatchEvent(storageEvent);
+    } else {
+      console.log("No data selected");
+    }
+  };
 
   return (
     <>
-        <LayoutContent
-          layoutType={2}
-          content1={
+      <LayoutContent
+        layoutType={2}
+        content1={
+          <>
+            <div className="antd-query">
+              <div className="antd-query__left">
+                <label htmlFor="">Mã</label>
+                <div className="search">
+                  <CiSearch size={20} className="search__icon" />
+                  <input type="text" placeholder="Search...." />
+                </div>
+              </div>
+              <div className="antd-query__rightside">
+                <Button type="primary" size="large" onClick={onButtonClick}>
+                  Mở
+                </Button>
+              </div>
+            </div>
             <div className="tableHT">
               <Table<Ship>
                 columns={columns}
@@ -235,60 +263,61 @@ function ShipDefinition() {
                 scroll={{ x: "max-content" }}
               />
             </div>
-          }
-          content2={
-            <Form
-              form={form}
-              colon={false}
-              onFinish={isEditing ? handleSave : undefined}
-              layout="vertical"
-              className="antd-form"
-            >
-              {formItem}
-              <Form.Item style={{ textAlign: "right" }}>
-                {isEditing ? (
-                  <>
-                    <Button
-                      style={{
-                        padding: "20px",
-                        borderRadius: "10px",
-                        fontWeight: "bold",
-                      }}
-                      type="primary"
-                      htmlType="submit"
-                    >
-                      <FaRegSave size={20} /> Lưu
-                    </Button>
-                    <Button
-                      danger
-                      style={{
-                        marginLeft: "10px",
-                        padding: "20px",
-                        borderRadius: "10px",
-                        fontWeight: "bold",
-                      }}
-                      onClick={handleDelete}
-                    >
-                      <RiDeleteBin6Line size={20} /> Xóa
-                    </Button>
-                  </>
-                ) : (
+          </>
+        }
+        content2={
+          <Form
+            form={form}
+            colon={false}
+            onFinish={isEditing ? handleSave : undefined}
+            layout="vertical"
+            className="antd-form"
+          >
+            {formItem}
+            <Form.Item style={{ textAlign: "right" }}>
+              {isEditing ? (
+                <>
                   <Button
-                    type="primary"
-                    htmlType="submit"
                     style={{
                       padding: "20px",
                       borderRadius: "10px",
                       fontWeight: "bold",
                     }}
+                    type="primary"
+                    htmlType="submit"
                   >
-                    <IoIosAddCircle size={20} /> Thêm mới
+                    <FaRegSave size={20} /> Lưu
                   </Button>
-                )}
-              </Form.Item>
-            </Form>
-          }
-        />
+                  <Button
+                    danger
+                    style={{
+                      marginLeft: "10px",
+                      padding: "20px",
+                      borderRadius: "10px",
+                      fontWeight: "bold",
+                    }}
+                    onClick={handleDelete}
+                  >
+                    <RiDeleteBin6Line size={20} /> Xóa
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{
+                    padding: "20px",
+                    borderRadius: "10px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <IoIosAddCircle size={20} /> Thêm mới
+                </Button>
+              )}
+            </Form.Item>
+          </Form>
+        }
+      />
     </>
   );
 }

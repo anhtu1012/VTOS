@@ -1,10 +1,10 @@
 export interface Schedule {
   shipId: string;
-  trip: Number;
-  year: Number;
-  shipKey: Number;
-  imVoyNo: Number;
-  outVoyNo: Number;
+  trip: number;
+  year: number;
+  shipKey: number;
+  imVoyNo: number;
+  outVoyNo: number;
   serviceIn: string;
   shipBrand: string;
   ATB: string;
