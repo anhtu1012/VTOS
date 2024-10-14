@@ -4,6 +4,8 @@ import { Layout, ConfigProvider, theme } from "antd";
 import HeaderMain from "@/components/layout/header";
 import SiderMain from "@/components/layout/sider";
 import "./index.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { Content } = Layout;
 
@@ -14,6 +16,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const [shipInfo, setShipInfo] = useState<{
+    shipId: string;
+    trip?: number;
+    year?: number;
+    shipName?:string;
+    shipBrand?:string
+  } | null>(null);
+
+  const clearShipInfo = () => {
+    setShipInfo(null); // Hàm để xóa shipInfo
+  };
   // Sử dụng useEffect để lưu trạng thái collapsed vào localStorage
   useEffect(() => {
     const storedCollapsed = localStorage.getItem("siderCollapsed");
@@ -51,9 +64,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       <Layout>
-        <SiderMain collapsed={collapsed} setCollapsed={setCollapsed} />
+        <SiderMain
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          clearShipInfo={clearShipInfo}
+        />
         <Layout>
-          <HeaderMain collapsed={collapsed} />
+          <HeaderMain
+            collapsed={collapsed}
+            shipInfo={shipInfo}
+            setShipInfo={setShipInfo}
+          />
           <Content
             style={{
               margin: collapsed ? "24px 16px 24px 274px" : "24px 24px",
@@ -67,6 +88,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           </Content>
         </Layout>
       </Layout>
+      <ToastContainer />
     </ConfigProvider>
   );
 };

@@ -1,6 +1,6 @@
 export interface ShipInfo {
-    bay: number;
-    tier: number;
-    khoang: number;
-  }
-  
+  id: number;
+  bay: number;
+  tier: number;
+  khoang: number;
+}

@@ -1,1 +1,42 @@
-
+.antd-query {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  &__left {
+    label {
+      padding-bottom: 5px !important;
+      color: GRAY;
+    }
+    .search {
+      width: 267px;
+      height: 44px;
+      background-color: white !important;
+      display: flex;
+      align-items: center;
+      border: 1px solid gray;
+      gap: 5px;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      &__icon {
+        margin-left: 12px;
+      }
+      input {
+        font-size: 14px;
+        border: none;
+        outline: none;
+      }
+      
+      input:focus {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  &__rightside {
+    margin-top: 12px;
+  }
+}

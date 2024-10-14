@@ -109,20 +109,25 @@ const categoriesData = {
     { icon: <GiBus />, title: "Pre-Plan 3", link: "/pre-plan-3" },
   ],
 };
-// Titles and Icons for each selected item
-const titlesData: { [key: string]: string } = {
-  "1": "Hệ Thống",
-  "2": "Định Dạng",
-  "3": "Kế Hoạch",
-  "4": "Pre-Planning",
+const moduleData = {
+  "1": {
+    title: "Hệ Thống",
+    icon: <PieChartOutlined />,
+  },
+  "2": {
+    title: "Định Dạng",
+    icon: <DesktopOutlined />,
+  },
+  "3": {
+    title: "Kế Hoạch",
+    icon: <UserOutlined />,
+  },
+  "4": {
+    title: "Pre-Planning",
+    icon: <TeamOutlined />,
+  },
 };
 
-const iconsData: { [key: string]: JSX.Element } = {
-  "1": <PieChartOutlined />,
-  "2": <DesktopOutlined />,
-  "3": <UserOutlined />,
-  "4": <TeamOutlined />,
-};
 const getItem = (
   label: React.ReactNode,
   key: React.Key,
@@ -138,24 +143,30 @@ const getItem = (
 const SiderMain = ({
   collapsed,
   setCollapsed,
+  clearShipInfo,
 }: {
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  clearShipInfo: () => void;
 }) => {
   //
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>(
     () => localStorage.getItem("selectedMenuItem") || "1"
   );
-
-  // Update localStorage whenever selectedMenuItem changes
+  const selectedModule = moduleData[selectedMenuItem];
   useEffect(() => {
     localStorage.setItem("selectedMenuItem", selectedMenuItem);
   }, [selectedMenuItem]);
+
   const items = [
     getItem(
       <Link
         href={"/he-thong/thiet-lap-quy-luat"}
-        onClick={() => setCollapsed(true)}
+        onClick={() => {
+          setCollapsed(true);
+          localStorage.removeItem("activeIndex_1"); // Reset activeIndex của category "1"
+          clearShipInfo();
+        }}
       >
         <p>Hệ Thống</p>
       </Link>,
@@ -165,7 +176,11 @@ const SiderMain = ({
     getItem(
       <Link
         href={"/dinh-dang/dinh-nghia-tau"}
-        onClick={() => setCollapsed(true)}
+        onClick={() => {
+          setCollapsed(true);
+          localStorage.removeItem("activeIndex_2"); // Reset activeIndex của category "2"
+          clearShipInfo();
+        }}
       >
         <p>Định Dạng</p>
       </Link>,
@@ -175,7 +190,12 @@ const SiderMain = ({
     getItem(
       <Link
         href={"/ke-hoach/ke-hoach-tau"}
-        onClick={() => setCollapsed(true)}
+        onClick={() => {
+          setCollapsed(true);
+          localStorage.removeItem("activeIndex_3"); // Reset activeIndex của category "3"
+          localStorage.removeItem("selectedData");
+          clearShipInfo();
+        }}
       >
         <p>Kế Hoạch</p>
       </Link>,
@@ -183,7 +203,16 @@ const SiderMain = ({
       <UserOutlined />
     ),
     getItem(
-      <p onClick={() => setCollapsed(!collapsed)}>Pre-Planning</p>,
+      <p
+        onClick={() => {
+          setCollapsed(!collapsed);
+          localStorage.removeItem("activeIndex_4"); // Reset activeIndex của category "4"
+          localStorage.removeItem("selectedData");
+          clearShipInfo();
+        }}
+      >
+        Pre-Planning
+      </p>,
       "4",
       <TeamOutlined />
     ),
@@ -246,8 +275,9 @@ const SiderMain = ({
         {collapsed ? (
           <SiderComponents
             categories={categoriesData[selectedMenuItem]}
-            titleIcon={iconsData[selectedMenuItem]}
-            titleText={titlesData[selectedMenuItem]}
+            titleIcon={selectedModule.icon}
+            titleText={selectedModule.title}
+            selectedMenuItem={selectedMenuItem} // Pass selected category
           />
         ) : (
           ""

@@ -1,109 +1,165 @@
 "use client";
+import React, { useState } from "react";
+import { Button, Form, Input, Modal, Table, Checkbox } from "antd";
 import ActionButtons from "@/components/action-button";
 import LayoutContent from "@/components/layoutContent";
-import { Button, Form, Input, Modal, Table, TableColumnsType } from "antd";
-import React, { useState } from "react";
+import { ShipInfo } from "@/model/ship-definition/shipInfo";
+
+import EditableCell from "@/components/editableCell";
+import generateFieldConfig from "@/utils/validationEditCell";
 import { IoIosAddCircle } from "react-icons/io";
+import { toast } from "react-toastify";
 
-interface ShipInfo {
-  bay: number;
-  tier: number;
-  khoang: number;
-}
-
+const shipFields = {
+  bay: Number,
+  tier: Number,
+  khoang: Number,
+};
+// Sinh ra fieldConfig tự động dựa trên shipFields
+const fieldConfig = generateFieldConfig(shipFields);
 function InfoShip() {
   const [form] = Form.useForm();
-  const [editingRow, setEditingRow] = useState<ShipInfo | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [editingRow, setEditingRow] = useState<ShipInfo | null>(null);
-  const isEditing = (record: ShipInfo) => editingRow?.bay === record.bay;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingRows, setEditingRows] = useState<number[]>([]); // Chỉ lưu id của các row đang được chỉnh sửa
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+  const [data, setData] = useState<ShipInfo[]>([
+    { id: 1, bay: 1, tier: 2, khoang: 3 },
+    { id: 2, bay: 2, tier: 3, khoang: 4 },
+  ]);
+
+  const [rowForms, setRowForms] = useState<{ [key: number]: ShipInfo }>({});
+
+  const isEditing = (record: ShipInfo) => editingRows.includes(record.id);
 
   const onRowDoubleClick = (record: ShipInfo) => {
-    if (isEditing(record)) {
-      // If the row is already being edited, close it
-      setEditingRow(null);
-      form.resetFields(); // Reset form if editing is canceled
-    } else {
-      // Set the clicked row as the editing row and populate the form
-      setEditingRow(record);
-      form.setFieldsValue({ ...record });
+    if (!isEditing(record)) {
+      setEditingRows([...editingRows, record.id]);
+      setRowForms((prev) => ({
+        ...prev,
+        [record.id]: { ...record },
+      }));
     }
   };
 
-  // // Cancel editing for the row
-  // const cancel = () => {
-  //   setEditingKeys([]);
-  //   form.resetFields();
-  // };
-
-  const saveAll = async () => {
+  const saveAll = () => {
     try {
-      const currentValues = await form.validateFields();
-      const newData = data.map((item) => {
-        if (editingRow && item.bay === editingRow.bay) {
-          return { ...item, ...currentValues };
+      // Mảng để lưu các hàng đã được chỉnh sửa
+      const updatedRows = [];
+
+      const updatedData = data.map((row) => {
+        if (rowForms[row.id]) {
+          const hasChanges = Object.keys(rowForms[row.id]).some(
+            (key) => rowForms[row.id][key] !== row[key as keyof ShipInfo]
+          );
+
+          if (hasChanges) {
+            updatedRows.push(rowForms[row.id]); // Thêm các hàng đã chỉnh sửa vào mảng
+            return { ...rowForms[row.id] }; // Cập nhật hàng đã chỉnh sửa
+          }
         }
-        return item;
+        return row;
       });
 
-      setData(newData);
-      setEditingRow(null); // Clear editing row after save
-      form.resetFields(); // Reset form fields
+      // Cập nhật dữ liệu trong state
+      setData(updatedData);
+
+      // Log ra mảng các hàng đã chỉnh sửa
+      if (updatedRows.length > 0) {
+        console.log("Updated rows:", updatedRows);
+      } else {
+        console.log("No rows updated.");
+      }
+
+      // Xóa trạng thái chỉnh sửa và form
+      setEditingRows([]);
+      setRowForms({});
     } catch (errInfo) {
       console.log("Save failed:", errInfo);
     }
   };
 
-  // Add new entry handler
-  // const handleAdd = () => {
-  //   setIsModalVisible(true);
-  //   form.resetFields();
-  // };
-
-  const handleSave = (values: ShipInfo) => {
-    const newShip: ShipInfo = { bay: data.length + 1, ...values };
-    setData([...data, newShip]);
-    setIsModalVisible(false);
+  const handleDelete = () => {
+    const newData = data.filter((item) => !selectedRows.includes(item.id));
+    setData(newData);
+    setSelectedRows([]);
   };
 
-  const handleDelete = () => {
-    if (editingRow) {
-      const newData = data.filter((item) => item.bay !== editingRow.bay);
-      setData(newData);
-      setEditingRow(null); // Clear editing row after delete
-      form.resetFields(); // Reset form fields
+  const handleAdd = (values: ShipInfo) => {
+    const newData = {
+      id: data.length + 1,
+      bay: values.bay,
+      tier: values.tier,
+      khoang: values.khoang,
+    };
+    toast.success("Thêm thành công");
+    setData([...data, newData]);
+    setModalVisible(false);
+    form.resetFields();
+  };
+
+  const handleSelect = (id: number) => {
+    const updatedSelectedRows = selectedRows.includes(id)
+      ? selectedRows.filter((selectedId) => selectedId !== id)
+      : [...selectedRows, id];
+    setSelectedRows(updatedSelectedRows);
+  };
+
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedRows(data.map((row) => row.id)); // Chọn tất cả
+    } else {
+      setSelectedRows([]); // Bỏ chọn tất cả
     }
   };
 
-  const columns: TableColumnsType<ShipInfo> = [
+  const columns = [
     {
       title: "",
       dataIndex: "key",
       key: "index",
       width: "50px",
-      editable: true,
       render: (_, __, index) => index + 1,
+    },
+    {
+      title: (
+        <Checkbox
+          checked={selectedRows.length === data.length}
+          indeterminate={
+            selectedRows.length > 0 && selectedRows.length < data.length
+          }
+          onChange={(e) => handleSelectAll(e.target.checked)}
+        />
+      ),
+      width: "50px",
+      dataIndex: "select",
+      key: "select",
+      render: (_, record) => (
+        <Checkbox
+          checked={selectedRows.includes(record.id)}
+          onChange={() => handleSelect(record.id)}
+        />
+      ),
     },
     {
       title: "Số bay",
       dataIndex: "bay",
       key: "bay",
       editable: true,
-      sorter: (a, b) => parseInt(a.bay) - parseInt(b.bay),
+      sorter: (a, b) => a.bay - b.bay,
     },
     {
       title: "Số tier",
       dataIndex: "tier",
       key: "tier",
       editable: true,
-      sorter: (a, b) => parseInt(a.tier) - parseInt(b.tier),
+      sorter: (a, b) => a.tier - b.tier,
     },
     {
       title: "Số khoang",
       dataIndex: "khoang",
       key: "khoang",
       editable: true,
-      sorter: (a, b) => parseInt(a.khoang) - parseInt(b.khoang),
+      sorter: (a, b) => a.khoang - b.khoang,
     },
   ].map((col) => ({
     ...col,
@@ -113,93 +169,24 @@ function InfoShip() {
       dataIndex: col.dataIndex,
       title: col.title,
       editing: isEditing(record),
+      onUpdateRow: (updatedRow: ShipInfo) => {
+        setRowForms((prev) => {
+          const previousRow = prev[record.id] || record;
+          // Chỉ cập nhật giá trị nào đã thay đổi, giữ nguyên các giá trị khác
+          const mergedRow = {
+            ...previousRow,
+            [col.dataIndex]:
+              updatedRow[col.dataIndex] ?? previousRow[col.dataIndex],
+          };
+          return {
+            ...prev,
+            [record.id]: mergedRow,
+          };
+        });
+      },
+      fieldConfig,
     }),
   }));
-
-  const [data, setData] = useState<ShipInfo[]>([
-    {
-      bay: 1,
-      tier: 2,
-      khoang: 3,
-    },
-    {
-      bay: 2,
-      tier: 3,
-      khoang: 4,
-    },
-    {
-      bay: 3,
-      tier: 1,
-      khoang: 2,
-    },
-    {
-      bay: 4,
-      tier: 4,
-      khoang: 5,
-    },
-    {
-      bay: 5,
-      tier: 5,
-      khoang: 6,
-    },
-    {
-      bay: 6,
-      tier: 6,
-      khoang: 7,
-    },
-    {
-      bay: 7,
-      tier: 7,
-      khoang: 8,
-    },
-    {
-      bay: 8,
-      tier: 8,
-      khoang: 9,
-    },
-    {
-      bay: 9,
-      tier: 9,
-      khoang: 10,
-    },
-    {
-      bay: 10,
-      tier: 10,
-      khoang: 11,
-    },
-    {
-      bay: 11,
-      tier: 11,
-      khoang: 12,
-    },
-    {
-      bay: 12,
-      tier: 12,
-      khoang: 13,
-    },
-    {
-      bay: 13,
-      tier: 13,
-      khoang: 14,
-    },
-    {
-      bay: 14,
-      tier: 14,
-      khoang: 15,
-    },
-    {
-      bay: 15,
-      tier: 15,
-      khoang: 16,
-    },
-  ]);
-
-  // const rowClassName = (record: ShipInfo) => (selectedRow && record.bay === selectedRow.bay ? "selected-row" : "");
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-    form.resetFields();
-  };
 
   return (
     <>
@@ -207,15 +194,17 @@ function InfoShip() {
         layoutType={3}
         content1={
           <ActionButtons
-            onAdd={() => setIsModalVisible(true)}
+            onAdd={() => setModalVisible(true)}
             onSave={saveAll}
             onDelete={handleDelete}
+            onQuery={() => {}}
+            isQueryHidden
           />
         }
         content2={
           <Form form={form} component={false}>
             <div className="tableHT">
-              <Table<ShipInfo>
+              <Table
                 components={{
                   body: {
                     cell: EditableCell,
@@ -224,51 +213,49 @@ function InfoShip() {
                 columns={columns}
                 pagination={{ pageSize: 14 }}
                 dataSource={data}
-                // rowClassName={rowClassName}
                 onRow={(record) => ({
                   onDoubleClick: () => onRowDoubleClick(record),
                 })}
                 scroll={{ x: "max-content" }}
+                rowKey="id"
               />
             </div>
           </Form>
         }
       />
       <Modal
-        title={"Add New Ship"}
-        visible={isModalVisible}
-        onCancel={closeModal}
+        title="Thêm Thông tin tàu"
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
         footer={null}
       >
-        <Form form={form} colon={false} onFinish={handleSave} layout="vertical">
+        <Form form={form} onFinish={handleAdd} layout="vertical">
           <Form.Item
+            name="bay"
+            label="Số bay"
             className="antd-form__item"
-            name="shipId"
-            label="Ship ID"
-            rules={[{ required: true, message: "Please input the ship ID!" }]}
             required={false}
+            rules={[{ required: true, message: "Vui lòng nhập số bay" }]}
           >
-            <Input placeholder="Enter ship ID" />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             className="antd-form__item"
-            name="shipName"
-            label="Ship Name"
-            rules={[{ required: true, message: "Please input the ship name!" }]}
             required={false}
+            name="tier"
+            label="Số tier"
+            rules={[{ required: true, message: "Vui lòng nhập số tier" }]}
           >
-            <Input placeholder="Enter ship name" />
+            <Input type="number" />
           </Form.Item>
           <Form.Item
             className="antd-form__item"
-            name="shipBrand"
-            label="Ship Brand"
-            rules={[
-              { required: true, message: "Please input the ship brand!" },
-            ]}
             required={false}
+            name="khoang"
+            label="Số khoang"
+            rules={[{ required: true, message: "Vui lòng nhập số khoang" }]}
           >
-            <Input placeholder="Enter ship brand" />
+            <Input type="number" />
           </Form.Item>
           <Form.Item style={{ textAlign: "right" }}>
             <Button type="primary" htmlType="submit">
@@ -280,51 +267,5 @@ function InfoShip() {
     </>
   );
 }
-const EditableCell: React.FC<any> = ({
-  editing,
-  dataIndex,
-  title,
-  children,
-  ...restProps
-}) => {
-  // Validate if the value is numeric and not empty
-  const validateNumeric = (value: any) => {
-    return (
-      value !== undefined &&
-      value !== null &&
-      value !== "" &&
-      !isNaN(value) &&
-      Number.isFinite(Number(value))
-    );
-  };
 
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{ margin: 0 }}
-          rules={[
-            {
-              required: true,
-            },
-            {
-              validator: (_, value) => {
-                return validateNumeric(value)
-                  ? Promise.resolve()
-                  : Promise.reject(
-                      new Error(`${title} must be a valid number!`)
-                    );
-              },
-            },
-          ]}
-        >
-          <Input type="number" />
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
 export default InfoShip;

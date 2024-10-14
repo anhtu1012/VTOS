@@ -63,7 +63,6 @@ function LayoutContent({ layoutType, content1, content2 }: LayoutContentProps) {
         style={{
           display: "flex",
           flexDirection: "column",
-          height: "90vh",
           borderRadius: "10px",
           gap: "12px",
         }}
@@ -77,9 +76,7 @@ function LayoutContent({ layoutType, content1, content2 }: LayoutContentProps) {
             borderRadius: "10px",
           }}
         >
-          <div className="feature">
-              {/* Thêm xóa lưu ở đây */}
-          </div>
+          <div className="feature">{/* Thêm xóa lưu ở đây */}</div>
           {content1}
         </div>
         <div
