@@ -6,6 +6,7 @@ import { Button, Form, Input } from "antd";
 // import { toast } from "react-toastify";
 import { useForm } from "antd/es/form/Form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 // import { useDispatch } from "react-redux";
 // import { login } from "../../redux/features/userSlice";
 // import { LoginFormValues, RegisterFormValues } from "../../model/login";
@@ -15,6 +16,7 @@ const Login = () => {
   const [rightPanelActive, setRightPanelActive] = useState(false);
   const [signInForm] = useForm();
   const [signUpForm] = useForm();
+
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
   const [loginError, setLoginError] = useState("");
@@ -29,6 +31,10 @@ const Login = () => {
     setRightPanelActive(false);
   };
 
+  const router = useRouter();
+  const handleLogin = () => {
+    router.push("/chon_phan_he", { scroll: false });
+  };
   // const handleLogin = async (values: LoginFormValues) => {
   //   try {
   //     const response = await loginUser(values);
@@ -76,10 +82,7 @@ const Login = () => {
         id="container"
       >
         <div className="form-container sign-up-container">
-          <Form
-            form={signUpForm}
-            className="login_form"
-          >
+          <Form form={signUpForm} className="login_form">
             <h1>Create Account</h1>
             <div className="social-container">
               <Link href="#" className="social">
@@ -176,7 +179,7 @@ const Login = () => {
           </Form>
         </div>
         <div className="form-container sign-in-container">
-          <Form form={signInForm} className="login_form" >
+          <Form form={signInForm} className="login_form" onFinish={handleLogin}>
             <h1>Login Account</h1>
             <div className="social-container">
               <Link href="#" className="social">

@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-function page() {
+function Page() {
   return <div>Page</div>;
 }
 
-export default page;
+export default Page;

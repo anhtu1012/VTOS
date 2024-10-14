@@ -19,96 +19,105 @@ const categoriesData = {
     {
       icon: <GiTruck />,
       title: "Thiết Lập Quy Luật",
-      link: "/he-thong/thiet-lap-quy-luat",
+      link: "/ship/he-thong/thiet-lap-quy-luat",
     },
   ],
   "2": [
     {
       icon: <GiTruck />,
       title: "Định nghĩa tàu",
-      link: "/dinh-dang/dinh-nghia-tau",
+      link: "/ship/dinh-dang/dinh-nghia-tau",
     },
     {
       icon: <GiCarWheel />,
       title: "Thông tin tàu",
-      link: "/dinh-dang/thong-tin-tau",
+      link: "/ship/dinh-dang/thong-tin-tau",
     },
     {
       icon: <GiBus />,
       title: "Thông tin sơ đồ",
-      link: "/dinh-dang/thong-tin-so-do",
+      link: "/ship/dinh-dang/thong-tin-so-do",
     },
-    { icon: <GiBus />, title: "Thiết kế tàu", link: "/dinh-dang/thiet-ke-tau" },
+    {
+      icon: <GiBus />,
+      title: "Thiết kế tàu",
+      link: "/ship/dinh-dang/thiet-ke-tau",
+    },
     {
       icon: <GiBus />,
       title: "Trọng lượng tối đa",
-      link: "/dinh-dang/trong-luong-toi-da",
+      link: "/ship/dinh-dang/trong-luong-toi-da",
     },
-    { icon: <GiBus />, title: "In sơ đồ tàu", link: "/dinh-dang/in-so-do-tau" },
+    {
+      icon: <GiBus />,
+      title: "In sơ đồ tàu",
+      link: "/ship/dinh-dang/in-so-do-tau",
+    },
   ],
   "3": [
     {
       icon: <GiTruck />,
       title: "Kế hoạch tàu",
-      link: "/ke-hoach/ke-hoach-tau",
+      link: "/ship/ke-hoach/ke-hoach-tau",
     },
     {
       icon: <GiCarWheel />,
       title: "Kế hoạch dỡ container",
-      link: "/ke-hoach/ke-hoach-do-container",
+      link: "/ship/ke-hoach/ke-hoach-do-container",
     },
     {
       icon: <GiBus />,
       title: "Kế hoạch xếp container",
-      link: "/ke-hoach/ke-hoach-xep-container",
+      link: "/ship/ke-hoach/ke-hoach-xep-container",
     },
     {
       icon: <GiBus />,
       title: "Danh sách container xuất tàu",
-      link: "/ke-hoach/danh-sach-container-xuat-tau",
+      link: "/ship/ke-hoach/danh-sach-container-xuat-tau",
     },
     {
       icon: <GiBus />,
       title: "Giám sát bãi",
-      link: "/ke-hoach/giam-sat-bai",
+      link: "/ship/ke-hoach/giam-sat-bai",
     },
     {
       icon: <GiBus />,
       title: "Thống kê kế hoạch xếp dỡ",
-      link: "/ke-hoach/thong-ke-ke-hoach-xep-do",
+      link: "/ship/ke-hoach/thong-ke-ke-hoach-xep-do",
     },
     {
       icon: <GiBus />,
       title: "Gán cẩu",
-      link: "/ke-hoach/gan-cau",
+      link: "/ship/ke-hoach/gan-cau",
     },
     {
       icon: <GiBus />,
       title: "Cập nhật danh sách container xuất tàu",
-      link: "/ke-hoach/cap-nhat-danh-sach-container-xuat-tau",
+      link: "/ship/ke-hoach/cap-nhat-danh-sach-container-xuat-tau",
     },
     {
       icon: <GiBus />,
       title: "In kế hoạch",
-      link: "/ke-hoach/in-ke-hoach",
+      link: "/ship/ke-hoach/in-ke-hoach",
     },
     {
       icon: <GiBus />,
       title: "CMC",
-      link: "/ke-hoach/CMC",
+      link: "/ship/ke-hoach/CMC",
     },
     {
       icon: <GiBus />,
       title: "Out Bound Prelan",
-      link: "/ke-hoach/out-bound-preplan",
+      link: "/ship/ke-hoach/out-bound-preplan",
     },
   ],
   "4": [
-    { icon: <GiTruck />, title: "Pre-Plan 1", link: "/pre-plan-1" },
-    { icon: <GiCarWheel />, title: "Pre-Plan 2", link: "/pre-plan-2" },
-    { icon: <GiBus />, title: "Pre-Plan 3", link: "/pre-plan-3" },
+    { icon: <GiTruck />, title: "Pre-Plan 1", link: "/ship/pre-plan-1" },
+    { icon: <GiCarWheel />, title: "Pre-Plan 2", link: "/ship/pre-plan-2" },
+    { icon: <GiBus />, title: "Pre-Plan 3", link: "/ship/pre-plan-3" },
   ],
 };
+
 const moduleData = {
   "1": {
     title: "Hệ Thống",
@@ -161,7 +170,7 @@ const SiderMain = ({
   const items = [
     getItem(
       <Link
-        href={"/he-thong/thiet-lap-quy-luat"}
+        href={"/ship/he-thong/thiet-lap-quy-luat"}
         onClick={() => {
           setCollapsed(true);
           localStorage.removeItem("activeIndex_1"); // Reset activeIndex của category "1"
@@ -175,7 +184,7 @@ const SiderMain = ({
     ),
     getItem(
       <Link
-        href={"/dinh-dang/dinh-nghia-tau"}
+        href={"/ship/dinh-dang/dinh-nghia-tau"}
         onClick={() => {
           setCollapsed(true);
           localStorage.removeItem("activeIndex_2"); // Reset activeIndex của category "2"
@@ -189,7 +198,7 @@ const SiderMain = ({
     ),
     getItem(
       <Link
-        href={"/ke-hoach/ke-hoach-tau"}
+        href={"/ship/ke-hoach/ke-hoach-tau"}
         onClick={() => {
           setCollapsed(true);
           localStorage.removeItem("activeIndex_3"); // Reset activeIndex của category "3"
